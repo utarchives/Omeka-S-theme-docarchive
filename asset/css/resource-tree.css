@@ -1,0 +1,108 @@
+@media screen {
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  opacity: 0.8;
+  background: url("throbber.gif") center center no-repeat;
+}
+
+#metadata-browse-properties .field.delete {
+background-color: #fcc;
+}
+
+#metadata-browse-properties .collapse + .collapsible {
+margin-top: .5em;
+}
+
+#metadata-browse-properties .restore-property {
+display: none;
+}
+
+a.metadata-browse-link {
+font-size: 75%;
+display: block !important;
+}
+
+#full-window>#item-set-tree {
+margin: 0 auto;
+min-height:400px;
+max-height:800px;
+min-width:400px;
+border:1px solid silver;
+overflow:auto;
+padding:0px 0;
+font-size:14px;}
+/**
+ For Block Layout
+*/
+#block-window>#item-set-tree {
+float:left;
+min-height:450px;
+max-height:800px;
+width:100%;
+border:1px solid silver;
+overflow:auto;
+padding:0px 0;
+font-size:14px;
+border-radius:0 0 5px 5px;
+}
+#block-window>#tree-header {
+width:100%;
+height:35px;
+border-top:solid 1px #BDBDBD;
+border-left:solid 1px #BDBDBD;
+border-right:solid 1px #BDBDBD;
+border-bottom-width:0px;
+background-color:#EFF2FB;
+padding:8px;
+vertical-align:middle;
+font-size:14px;
+border-radius:5px 5px 0px 0px;}
+#block-window>#tree-header>a {
+margin-left:50px;
+color:#4689FF;}
+}
+
+/* @media screen and (min-width: 1100px){
+#block-window>#item-set-tree {
+width:100%;
+max-width:370px;
+}
+#block-window>#tree-header {
+width:100%;
+max-width:370px;
+}
+}
+@media screen and (min-width: 1350px){
+#block-window>#item-set-tree {
+width:100%;
+max-width:400px;
+}
+#block-window>#tree-header {
+width:100%;
+max-width:400px;
+}
+}
+@media screen and (min-width: 1550px){
+#block-window>#item-set-tree {
+width:100%;
+max-width:460px;
+}
+#block-window>#tree-header {
+width:100%;
+max-width:460px;
+}
+}
+@media screen and (min-width: 1700px){
+#block-window>#item-set-tree {
+width:100%;
+max-width:520px;
+}
+#block-window>#tree-header {
+width:100%;
+max-width:520px;
+}
+} */
+

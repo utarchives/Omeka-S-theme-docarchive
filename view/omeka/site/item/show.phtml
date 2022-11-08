@@ -1,0 +1,89 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+$this->htmlElement('body')->appendAttribute('class', 'item resource show');
+$embedMedia = $this->siteSetting('item_media_embed');
+$itemMedia = $item->media();
+$searchUrl = $this->url('site/searchchildren-id', ['id' => $item->id()], true);
+$childrenUrl = $this->url('site/docarchive-id', ['id' => $item->id(), 'action' => 'show'], true);
+$identifier = $this->getDocArchiveIdentifier();
+$cleanUrl = $identifier->getCleanUrl();
+if ($cleanUrl) {
+    $itemIdentifier = $identifier->getIdentifier($item);
+    $searchUrl = $this->url('site/searchchildren-identifier', ['identifier' => $itemIdentifier], true);
+    $childrenUrl = $this->url('site/docarchive-identifier', ['identifier' => $itemIdentifier, 'action' => 'show'], true);
+}
+?>
+<?php echo $this->partial('common/bread-crumb.phtml', ['targetPage' => '資料詳細',]); ?>
+<div class="row">
+    <div class="col">
+        <p class="text-right">
+            <small><a href="javascript:history.back()" class="backlink">&raquo; 前の画面へ戻る</a></small>
+        </p>
+    </div>
+</div>
+<div class="row">
+       <div class="col">
+        <?php echo $this->partial('common/selected-resource-tree.phtml', ['item' => $item, 'site' =>$site]); ?>
+    </div>
+    <div class="col col-md-8">
+        <!--資料情報-->
+        <?php $this->trigger('view.show.before'); ?>
+        <div id="item-detail">
+            <div class="row" id="item-detail-header">
+                <div class="col">詳細情報</div>
+            </div>
+            <?php if ($item->subjectValueTotalCount() > 0): ?>
+            <div class="row">
+                <div class="col detail-button-area">
+                    <p class="text-right">
+                        <button id="show-directory-search-button" class="btn btn-primary" data-url="<?php echo $this->escapeHtml($searchUrl); ?>" type="button"><i class="fa fa-search" aria-hidden="true"></i> 資料群内の検索</button>
+                        <button id="show-children-button" class="btn btn-primary" data-url="<?php echo $this->escapeHtml($childrenUrl); ?>" type="button"> 資料群内の一覧</button>
+                    </p>
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <tr>
+                            <th><label>階層</label></th>
+                            <td><?php $this->treeList($item->id()) ?></td>
+                        </tr>
+                        <tr>
+                            <th width='20%'><label>タイトル</label></th>
+                            <td><?php $this->itemTitleWithRuby($item); ?></td>
+                        </tr>
+                            <?php echo $item->displayValues(); ?>
+                        <!-- <tr>
+                            <th colspan="2"><label>メタデータのダウンロード</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?php // $this->rdfXmlMaker($item) ?></th>
+                        </tr> -->
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="bottom-of-data">
+        <?php $this->trigger('view.show.after'); ?>
+        </div>
+
+            <?php /* if ($embedMedia && $itemMedia): ?>
+            <div class="media-list" id="media-panel">
+                <?php $colNumber = 0; $count = 1;?>
+                <?php foreach ($itemMedia as $media): ?>
+                <?php if ($colNumber == 0) :?><div class="row"><?php endif; $colNumber++;?>
+                    <div class="col-sm-3">
+                        <div class="media-unit">
+                            <?php echo $this->mediaLink($media, 'medium', ['target' => '_new']); ?>
+                            <div class="media-count">
+                                <?php echo $count; ?> / <?php echo count($itemMedia); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if ($colNumber%4 == 0):?></div><?php $colNumber = 0; endif; $count++;?>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; */?>
+    </div>
+</div>
+
+

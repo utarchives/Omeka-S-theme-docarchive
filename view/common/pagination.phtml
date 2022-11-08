@@ -1,0 +1,53 @@
+<?php
+$this->headLink()->prependStylesheet($this->assetUrl('css/simplePagination.css'));
+$this->headScript()->prependFile($this->assetUrl('js/jquery.simplePagination.js'));
+?>
+<nav class="pagination-row" role="navigation">
+<?php if ($totalCount): ?>
+    <ul class="pagination"></ul>
+<?php endif; ?>
+</nav>
+<script>
+
+var numPerPageParam = <?php echo $perPage ?>;
+var len4AllResult = <?php echo $totalCount ?>;
+var pageParam = <?php echo $currentPage?>;
+var paramObj = {};
+
+$(document).ready( function() {
+    setParamObj();
+    function setParamObj(){
+        var currentParamStr = location.search.substring(1);
+        var params = currentParamStr.split("&");
+        for(var i = 0; i < params.length;i ++){
+            var param = params[i].split("=");
+            paramObj[param[0]] = param[1];
+        }
+    }
+
+    $('.pagination').pagination({
+        items: Math.ceil(len4AllResult / numPerPageParam),
+        itemOnPage: numPerPageParam,
+        currentPage: pageParam,
+        cssStyle: '',
+        prevText: '<span aria-hidden="true">&laquo;</span>',
+        nextText: '<span aria-hidden="true">&raquo;</span>',
+        onInit: function () {
+            // fire first page loading
+        },
+        onPageClick: function (page, evt) {
+            paramObj['page'] = page;
+            paramObj['old_per_page'] = numPerPageParam;
+            var paramStr = "";
+            for(var key in paramObj){
+                paramStr += key+"="+paramObj[key]+"&";
+            }
+            location.href = "?"+paramStr;
+            return false;
+        }
+    });
+});
+
+
+
+</script>
