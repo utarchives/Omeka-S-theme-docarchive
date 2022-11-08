@@ -58,13 +58,31 @@ $targetProperties = ['archiveshub:dateCreatedAccumulatedString',
                 }
                 ?>
                     <div class="<?php echo $class; ?>" lang="<?php echo $escape($value->lang()); ?>">
-                    <?php if ($language = $value->lang()): ?>
-                    <span class="language"><?php echo $language; ?></span>
-                    <?php endif; ?>
-                    <?php if (strcmp('resource', $value->type()) != 0): ?>
-                    <?php echo $value->asHtml(); ?>
-                    <?php endif;?>
-                </div>
+                        <?php if($targetProperty == "dcterms:rights" || $targetProperty == "utarchives:metadataRights"): ?>
+                            <?php if($value->uri() == "http://creativecommons.org/licenses/by/4.0/"){
+                                echo '<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.';
+                            } else if($value->uri() == "http://creativecommons.org/licenses/by-sa/4.0/"){
+                                echo '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.';
+                            } else if($value->uri() == "http://creativecommons.org/licenses/by-nc/4.0/"){
+                                echo '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.';
+                            } else if($value->uri() == "http://creativecommons.org/licenses/by-nc-sa/4.0/"){
+                                echo '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.';
+                            } else if($value->uri() == "http://creativecommons.org/publicdomain/mark/1.0/"){
+                                echo '<a href="http://creativecommons.org/publicdomain/mark/1.0/"><img src="https://licensebuttons.net/p/mark/1.0/88x31.png" /></a>';
+                            } else if($value->uri() == "http://creativecommons.org/publicdomain/zero/1.0/"){
+                                echo '<a href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" /></a>';
+                            } else {
+                                echo $value->asHtml();
+                            } ?>
+                        <?php else: ?>
+                            <?php if ($language = $value->lang()): ?>
+                                <span class="language"><?php echo $language; ?></span>
+                            <?php endif; ?>
+                            <?php if (strcmp('resource', $value->type()) != 0): ?>
+                                <?php echo $value->asHtml(); ?>
+                            <?php endif;?>
+                        <?php endif;?>
+                    </div>
               </td>
         </tr>
         <?php endforeach; ?>
