@@ -27,7 +27,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/resource-tree.css'));
 // $this->headLink()->appendStylesheet($this->assetUrl('css/fa-regular.css'));
 // $this->headLink()->appendStylesheet($this->assetUrl('css/fontawesome.min.css'));
 $this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => $this->basePath() . '/themes/docarchive/asset/img/favicon.ico', 'type' => 'image/x-icon'), 'PREPEND');
-$this->headScript()->prependFile($this->assetUrl('js/docarchive.js'));
+$this->headScript()->prependFile($this->assetUrl('js/docarchive.js?' . date('YmdHis')));
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
 $this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
@@ -77,6 +77,24 @@ try {
         function startSearch() {
             $('#loading').show();
         }
+        $(window).on("beforeunload", function(e) {
+            let navigationType = window?.performance?.getEntriesByType("navigation")[0].type;
+            switch(navigationType) {
+                case "navigate":
+                    console.log(navigationType + " : ページ遷移");
+                    startSearch();
+                    break;
+                case "reload":
+                    console.log(navigationType + " : ページ更新");
+                    break;
+                case "back_forward":
+                    startSearch();
+                    break;
+                case "prerender":
+                    console.log(navigationType + " : prerender");
+                    break;
+            }
+        });
     </script>
     <style>
       label {
@@ -111,7 +129,7 @@ try {
 
         /* ローディング回転部分 */
         #loading-main:after, #loading-main:before {
-            content: "検索中";
+            content: "";
             display: block;
             width: 100%;
             height: 100%;
@@ -120,7 +138,6 @@ try {
             top: 40%;
             left: 50%;
             border-radius: 110%; }
-
         /* #loading-main {
             display: block;
             width: 30px;
@@ -169,7 +186,6 @@ try {
         <div id="loading" style="display: none">
             <div id="loading-main"></div>
         </div>
-
         <header<?php if ($userBar) { echo ' style="padding-top:0;"';} ?>>
         <?php echo $userBar; ?>
         <div class="header-content">

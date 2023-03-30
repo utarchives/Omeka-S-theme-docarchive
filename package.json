@@ -1,14 +1,14 @@
 {
-  "name": "docarchive",
+  "name": "default",
   "version": "1.0.0",
-  "description": "The docarchive theme for Omeka S.",
+  "description": "The default theme for Omeka S.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/utarchives/Omeka-S-theme-docarchive.git"
+    "url": "git+https://github.com/omeka-s-themes/default.git"
   },
   "keywords": [
     "omeka-s",
@@ -17,9 +17,9 @@
   "author": "RRCHNM",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/utarchives/Omeka-S-theme-docarchive/issues"
+    "url": "https://github.com/omeka-s-themes/default/issues"
   },
-  "homepage": "https://github.com/utarchives/Omeka-S-theme-docarchive#readme",
+  "homepage": "https://github.com/omeka-s-themes/default#readme",
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "gulp": "^3.9.1",

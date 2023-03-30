@@ -1,4 +1,7 @@
 @media screen{
+input[type="radio"], input[type="checkbox"] {
+    accent-color: #007bff;
+}
 .col {
     width: 35%;
     flex-basis: auto;

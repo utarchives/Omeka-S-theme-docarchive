@@ -17,15 +17,20 @@ if ($cleanUrl) {
 <div class="row">
     <div class="col">
         <p class="text-right">
-            <small><a href="javascript:history.back()" class="backlink">&raquo; 前の画面へ戻る</a></small>
+            <?php if (array_key_exists('target', $_GET) && $_GET['target'] == 'new'): ?><small><a href="javascript:window.close()" class="backlink">この画面を閉じる</a></small>
+            <?php else: ?><small><a href="javascript:history.back()" class="backlink">&raquo; 前の画面へ戻る</a></small>
+            <?php endif; ?>
         </p>
     </div>
 </div>
+<div class="row" style="padding-bottom: 0; margin-bottom:0;">
+  <div class="col"><span id="chBtnDiv"></span></div>
+</div>
 <div class="row">
-       <div class="col">
+    <div class="col" id="side_div">
         <?php echo $this->partial('common/selected-resource-tree.phtml', ['item' => $item, 'site' =>$site]); ?>
     </div>
-    <div class="col col-md-8">
+    <div class="col col-md-8" id="main_div">
         <!--資料情報-->
         <?php $this->trigger('view.show.before'); ?>
         <div id="item-detail">
@@ -36,7 +41,7 @@ if ($cleanUrl) {
             <div class="row">
                 <div class="col detail-button-area">
                     <p class="text-right">
-                        <button id="show-directory-search-button" class="btn btn-primary" data-url="<?php echo $this->escapeHtml($searchUrl); ?>" type="button"><i class="fa fa-search" aria-hidden="true"></i> 資料群内の検索</button>
+                        <button id="show-directory-search-button" class="btn btn-primary" data-url="<?php echo $this->escapeHtml($searchUrl); ?>" type="button" onclick="startSearch()"><i class="fa fa-search" aria-hidden="true"></i> 資料群内の検索</button>
                         <button id="show-children-button" class="btn btn-primary" data-url="<?php echo $this->escapeHtml($childrenUrl); ?>" type="button"> 資料群内の一覧</button>
                     </p>
                 </div>
