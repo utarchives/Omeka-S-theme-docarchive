@@ -26,7 +26,7 @@ $this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Open+San
 $this->headLink()->appendStylesheet($this->assetUrl('css/resource-tree.css'));
 // $this->headLink()->appendStylesheet($this->assetUrl('css/fa-regular.css'));
 // $this->headLink()->appendStylesheet($this->assetUrl('css/fontawesome.min.css'));
-$this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => $this->basePath() . '/themes/docarchive/asset/img/favicon.ico', 'type' => 'image/x-icon'), 'PREPEND');
+//$this->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => $this->basePath() . '/themes/docarchive/asset/img/favicon.ico', 'type' => 'image/x-icon'), 'PREPEND');
 $this->headScript()->prependFile($this->assetUrl('js/docarchive.js?' . date('YmdHis')));
 $this->headScript()->prependFile($this->assetUrl('js/default.js'));
 $this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
